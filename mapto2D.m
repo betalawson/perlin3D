@@ -61,7 +61,7 @@ while ~stop
     dE = calcDeriv(vertices, points2D, edgematrix);
     
     % Calculate the new search direction
-    beta = max([0, dE * (dE - dE_old)' / ( dE_old * dE_old')])
+    beta = max([0, dE * (dE - dE_old)' / ( dE_old * dE_old')]);
     d = -dE + beta * d;
         
     % Increment iteration count
@@ -74,7 +74,7 @@ while ~stop
     
     % Update 'old' value of energy to the new value in preparation for new
     % loop, and ditto for the derivative
-    E_old = E
+    E_old = E;
     dE_old = dE;
     
     % Plot the current state
@@ -123,8 +123,8 @@ for j = 1:Np
     for i = find(edgematrix(j,:))
         
         % From formula in Mailot 1993
-        dE(2*j-1) = dE(2*j-1) + 8 * (norm(points2D(j,:) - points2D(i,:))^2 - norm(vertices(j,:) - vertices(i,:))^2 ) / norm(vertices(j,:) - vertices(i,:))^2 * (points2D(j,1) - points2D(i,1));
-        dE(2*j) = dE(2*j) + 8 * (norm(points2D(j,:) - points2D(i,:))^2 - norm(vertices(j,:) - vertices(i,:))^2 ) / norm(vertices(j,:) - vertices(i,:))^2 * (points2D(j,2) - points2D(i,2));
+        dE(2*j-1) = dE(2*j-1) + 8 * (norm(points2D(j,:) - points2D(i,:))^2 - norm(vertices(j,:) - vertices(i,:))^2 ) / ( norm(vertices(j,:) - vertices(i,:))^2 ) * (points2D(j,1) - points2D(i,1));
+        dE(2*j) = dE(2*j) + 8 * (norm(points2D(j,:) - points2D(i,:))^2 - norm(vertices(j,:) - vertices(i,:))^2 ) / ( norm(vertices(j,:) - vertices(i,:))^2 ) * (points2D(j,2) - points2D(i,2));
         
     end 
 end
